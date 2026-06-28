@@ -1,11 +1,8 @@
 {
-  description = "A Nix-flake-based JS development environment";
-
-  inputs.nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-
+  description = "JS development environment";
+  inputs.nixpkgs.url = "nixpkgs";
   outputs =
     { self, ... }@inputs:
-
     let
       supportedSystems = [
         "x86_64-linux"
@@ -33,12 +30,11 @@
               typescript-language-server
             ];
             shellHook = ''
-              [ -x /bin/zsh ] && exec zsh
+              [ -x /bin/zsh ] && { export SHELL=/bin/zsh; exec zsh; }
             '';
           };
         }
       );
-
       formatter = forEachSupportedSystem ({ pkgs, ... }: pkgs.nixfmt);
     };
 }
