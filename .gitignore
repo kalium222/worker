@@ -3,4 +3,5 @@
 !.gitignore
 !flake.nix
 !flake.lock
+!wrangler.jsonc
 !**/*.js
