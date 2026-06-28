@@ -28,6 +28,7 @@
             packages = with pkgs; [
               nodejs
               typescript-language-server
+              wrangler
             ];
             shellHook = ''
               [ -x /bin/zsh ] && { export SHELL=/bin/zsh; exec zsh; }
