@@ -1,19 +1,17 @@
 // return the file on /path/to/file
 // list file on /music?prefix=...&limit=...
 export default {
-    async fetch(request, env, ctx) {
+    async fetch(request, env) {
         const url = new URL(request.url)
         const path = url.pathname
-        console.log(path)
         switch (request.method) {
             case "GET": {
                 const prefix = url.searchParams.get('prefix') || ''
-                const limit = url.searchParams.get('limit') || 10
+                const limit = Math.min(parseInt(url.searchParams.get('limit')) || 10, 500)
                 if (path === '/music')
                     return await listFile(env.MUSIC, prefix, limit)
                 else {
                     const key = decodeURIComponent(path.slice(1));
-                    console.log(key)
                     return await getFile(env.MUSIC, key)
                 }
             }
